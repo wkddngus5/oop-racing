@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+
 import Race from './models/Race';
+import _ from './models/_';
 
 type Scene = number[];
 
@@ -87,12 +89,12 @@ function App() {
                             }}>
                             {carIndex + 1}번째 차
                           </span>
-                          {(new Array(scenes.length)).fill(0).map((_, index) => {
+                          {(_.range(scenes.length)).map((sceneNumber) => {
                             return (
                               <div
-                                key={index}
+                                key={sceneNumber}
                                 style={{
-                                  backgroundColor: index < car ? 'red' : 'blue',
+                                  backgroundColor: sceneNumber < car ? 'red' : 'blue',
                                   width: '20px',
                                   height: '20px',
                                   display: 'inline-block',

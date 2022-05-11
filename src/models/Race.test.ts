@@ -31,4 +31,11 @@ describe('Race', () => {
 
     expect(new Race(carCount, sceneCount).result.length).toBe(sceneCount);
   });
+
+  it('every result scenes must have length as carCount', () => {
+    const carCount = 5;
+    const sceneCount = 3;
+
+    expect(new Race(carCount, sceneCount).result.every(scene => scene.length === carCount)).toBeTruthy();
+  });
 });

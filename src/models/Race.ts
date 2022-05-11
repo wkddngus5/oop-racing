@@ -1,5 +1,6 @@
 import Car from './Car';
 import NumberValue from './NumberValue';
+import _ from './_';
 
 class Race {
   cars: Car[] = [];
@@ -13,13 +14,13 @@ class Race {
       throw new Error('전진 시도 횟수는 자연수만 가능해요');
     }
 
-    this.cars = new Array(carCount).fill(null).map(() => new Car());
+    this.cars = _.range(carCount).map(() => new Car());
     this.sceneCount = sceneCount;
   }
 
   get result(): number[][] {
-    return (new Array(this.sceneCount))
-      .fill(null)
+    return _
+      .range(this.sceneCount)
       .map(() => this.cars.map(car => car.getNextDistance()));
   }
 }
