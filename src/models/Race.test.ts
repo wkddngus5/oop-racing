@@ -24,4 +24,11 @@ describe('Race', () => {
     expect(getRaceMaker(NEGATIVE_NUMBER)).toThrowError();
     expect(getRaceMaker(DECIMAL_NUMBER)).toThrowError();
   });
+
+  it('result must have length as sceneCount', () => {
+    const carCount = 5;
+    const sceneCount = 3;
+
+    expect(new Race(carCount, sceneCount).result.length).toBe(sceneCount);
+  });
 });

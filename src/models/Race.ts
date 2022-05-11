@@ -1,5 +1,6 @@
 class Race {
-  cars = [];
+  cars: unknown[] = [];
+  sceneCount = 1;
 
   constructor(carCount: number, sceneCount: number) {
     if (carCount < 1) {
@@ -14,10 +15,13 @@ class Race {
     if (sceneCount % 1 !== 0) {
       throw new Error('전진 시도 횟수는 자연수만 가능해요');
     }
+
+    this.cars = new Array(carCount).fill(0);
+    this.sceneCount = sceneCount;
   }
 
-  get result() {
-    return [];
+  get result(): number[][] {
+    return (new Array(this.sceneCount)).fill([]);
   }
 }
 
