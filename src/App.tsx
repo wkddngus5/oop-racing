@@ -1,24 +1,123 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+
+type Scene = number[];
 
 function App() {
+  const [step, setStep] = useState(3);
+  const [count, setCount] = useState(1);
+  const [tryCount, setTryCount] = useState(1);
+
+  const [scenes, setScenes] = useState<Scene[]>([
+    [1, 1, 0, 1],
+    [2, 1, 1, 2],
+    [3, 2, 1, 2],
+    [4, 3, 1, 2],
+    [5, 3, 2, 3],
+  ]);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <main>
+        <h1>
+          자동차 경주
+        </h1>
+        <form
+          style={{ display: step === 1 ? 'block' : 'none' }}
+          onSubmit={(event) => {
+            event.preventDefault();
+            setStep(2)
+        }}
+        >
+          <h2>
+            <label>차 대수</label>
+          </h2>
+          <input
+            id="input-count"
+            type="number"
+            value={count}
+            onChange={(event) => {
+              setCount(Number(event.target.value));
+            }}
+          />
+        </form>
+        <form
+          style={{ display: step === 2 ? 'block' : 'none' }}
+          onSubmit={(event) => {
+            event.preventDefault();
+            setStep(3)
+          }}
+        >
+          <h2>
+            <label>이동 시도 횟수</label>
+          </h2>
+          <input
+            id="input-try"
+            type="number"
+            value={tryCount}
+            onChange={(event) => {
+              setTryCount(Number(event.target.value));
+            }}
+          />
+        </form>
+
+        <section
+          style={{ display: step === 3 ? 'block' : 'none' }}>
+          <h2>결과 보기</h2>
+
+          {
+            scenes.map((scene, sceneIndex) => {
+              return (
+                <div key={sceneIndex}>
+                  <h3>
+                    {sceneIndex + 1}번째 시나리오
+                  </h3>
+                  <div>
+                    {scene.map((car, carIndex) => {
+                      return (
+                        <div key={carIndex}>
+                          <span
+                            style={{
+                              display: 'inline-block',
+                              width: '100px',
+                            }}>
+                            {carIndex + 1}번째 차
+                          </span>
+                          {(new Array(scenes.length)).fill(0).map((_, index) => {
+                            return (
+                              <div
+                                key={index}
+                                style={{
+                                  backgroundColor: index < car ? 'red' : 'blue',
+                                  width: '20px',
+                                  height: '20px',
+                                  display: 'inline-block',
+                                  margin: '0 5px',
+                                }}
+                              />
+                            );
+                          })}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })
+          }
+
+          <button
+            type="button"
+            onClick={() => {
+              setStep(1);
+              setCount(1);
+              setTryCount(1);
+            }}>
+            처음으로
+          </button>
+        </section>
+      </main>
     </div>
   );
 }
