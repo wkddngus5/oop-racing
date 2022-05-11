@@ -116,6 +116,7 @@ function App() {
               setStep(1);
               setCount(1);
               setTryCount(1);
+              setScenes([]);
             }}>
             처음으로
           </button>
