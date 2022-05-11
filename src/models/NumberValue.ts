@@ -9,7 +9,8 @@ class NumberValue {
     if (this.value % 1 !== 0) {
       return false;
     }
-    return true;
+
+    return this.value >= 0;
   }
 }
 

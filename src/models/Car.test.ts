@@ -11,12 +11,13 @@ describe('Car', () => {
     expect(distance % 1 === 0).toBeTruthy();
   });
 
-  it('getNextDistance returns a number than greater then prev distance', () => {
+
+  it('getNextDistance returns a number than greater then prev distance or same', () => {
     const car = new Car();
   
     const prevDistance = car.getNextDistance();
     const currentDistance = car.getNextDistance();
 
-    expect(prevDistance < currentDistance).toBeTruthy();
+    expect(prevDistance <= currentDistance).toBeTruthy();
   });
 });
