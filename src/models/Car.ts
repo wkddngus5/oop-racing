@@ -1,3 +1,5 @@
+import Position from './Position';
+
 let id = 1;
 
 class Car {
@@ -8,13 +10,13 @@ class Car {
     this.id = id++;
 
     this.distance = (function* () {
-      let distance = initialDistance;
+      let position = new Position(initialDistance);
       while(true) {
         const flag = Math.floor(Math.random() * 10);
         if (flag >= 4) {
-          distance += 1;
+          position = new Position(position.getX() + 1);
         }
-        yield distance;
+        yield position.getX();
       }  
     })();
 

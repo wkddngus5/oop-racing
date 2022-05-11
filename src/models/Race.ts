@@ -1,20 +1,15 @@
 import Car from './Car';
+import NumberValue from './NumberValue';
 
 class Race {
   cars: Car[] = [];
   sceneCount = 1;
 
   constructor(carCount: number, sceneCount: number) {
-    if (carCount < 1) {
+    if (!(new NumberValue(carCount)).isNatural) {
       throw new Error('차량 수는 자연수만 가능해요');
     }
-    if (carCount % 1 !== 0) {
-      throw new Error('차량 수는 자연수만 가능해요');
-    }
-    if (sceneCount < 1) {
-      throw new Error('전진 시도 횟수는 자연수만 가능해요');
-    }
-    if (sceneCount % 1 !== 0) {
+    if (!(new NumberValue(sceneCount)).isNatural) {
       throw new Error('전진 시도 횟수는 자연수만 가능해요');
     }
 

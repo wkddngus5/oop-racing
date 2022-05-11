@@ -1,4 +1,5 @@
 import Car from './Car';
+import NumberValue from './NumberValue';
 
 describe('Car', () => {
   it('getNextDistance returns a natural number or 0', () => {
@@ -6,9 +7,7 @@ describe('Car', () => {
   
     const distance = car.getNextDistance();
 
-    expect(typeof distance === 'number').toBeTruthy();
-    expect(distance >= 0).toBeTruthy();
-    expect(distance % 1 === 0).toBeTruthy();
+    expect(new NumberValue(distance).isNatural || distance === 0).toBeTruthy();
   });
 
 
