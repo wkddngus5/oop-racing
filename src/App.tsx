@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Race from './models/Race';
 
 type Scene = number[];
 
 function App() {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
+
   const [count, setCount] = useState(1);
   const [tryCount, setTryCount] = useState(1);
 
-  const [scenes, setScenes] = useState<Scene[]>([
-    [1, 1, 0, 1],
-    [2, 1, 1, 2],
-    [3, 2, 1, 2],
-    [4, 3, 1, 2],
-    [5, 3, 2, 3],
-  ]);
+  const [scenes, setScenes] = useState<Scene[]>([[]]);
+
+  useEffect(() => {
+    if (step !== 3) {
+      return;
+    }
+    setScenes(new Race(count, tryCount).result);
+  }, [step, count, tryCount]);
 
   return (
     <div className="App">
